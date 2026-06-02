@@ -107,6 +107,15 @@ export default function CitizenDashboard() {
       return;
     }
     const parsedUser = JSON.parse(session);
+    
+    // Auto-correct role if they used the admin phone number
+    if (parsedUser && parsedUser.phone && parsedUser.phone.toString().replace(/\D/g, '') === '11111111111') {
+      parsedUser.role = 'admin';
+      localStorage.setItem('civic_user_session', JSON.stringify(parsedUser));
+      router.push('/admin');
+      return;
+    }
+
     setUser(parsedUser);
     
     // Attempt Geolocation
