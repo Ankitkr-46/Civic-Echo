@@ -167,7 +167,7 @@ export default function CitizenDashboard() {
             .eq('complaint_id', comp.id);
           return {
             ...comp,
-            upvotesList: uv?.map(u => u.user_id) || [],
+            upvotesList: uv?.map((u: any) => u.user_id) || [],
           };
         }));
         setComplaints(mapped);
